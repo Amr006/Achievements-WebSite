@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+ <%- include("./partials/head.ejs") %>
+<body>
+ 
+    <%- include("./partials/headers.ejs") %>
+<div class="container">
+<% for (let i = 0; i < weeks; i++) {%>
+<nav class="drop">
+      <input id="toggle" type="checkbox" checked>
+     <h2>Week<%=i+1%></h2>
+
+   <ul>
+    <%if(data[i+1]){
+      data[i+1].forEach(item => { %>
+        <li> <%=item.title %>  </li>
+
+      <%})
+
+    }%>
+      
+      
+     
+
+    
+   </ul>
+</nav>
+<% console.log(data[i+1] ) %>
+  <% } %>
+ 
+</div>
+
+
+</body>
+</html>

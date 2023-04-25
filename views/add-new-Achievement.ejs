@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+
+<html lang="ar">
+
+<%- include("./partials/head") %>
+
+<body id="body">
+
+    <%- include("./partials/headers") %>
+
+
+    <main id="main">
+
+        <section>
+            <h1>
+                Add new Achievement
+            </h1>
+
+<form action="/add-Achievement" method="post">
+    <label for="title">Achievement  </label>
+    <input id="title" type="text" name="title">
+
+
+    <!-- <label for="body">Article body:</label>
+    <textarea   id="body" name="body" ></textarea> -->
+
+
+    <button class="create">Add</button>
+</form>
+
+
+
+        </section>
+        
+        
+
+    </main>
+
+
+
+
+</body>
+
+</html>
