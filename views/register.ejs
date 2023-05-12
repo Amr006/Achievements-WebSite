@@ -1,75 +1,82 @@
 <!DOCTYPE html>
-<html>
-<head>
-<style>
-	body 
-		{
-		font-family: Arial, Helvetica, sans-serif;
-		margin-left:25%;
-		margin-right:25%;
-		border: 1px solid #000000;
-		margin-bottom: 5px;
-		padding: 0px 15px 0 15px;
-		}
-	input[type=text], input[type=password] 
-		{
-		width: 97%;
-		padding: 10px;
-		margin: 5px 0 22px 0;
-		display: inline-block;
-		border: none;
-		background: #F5F5F5;
-		}
-	hr 
-		{
-		border: 1px solid #e6e6e6;
-		margin-bottom: 5px;
-		}
-	.registerbutton
-		{
-		background-color: #29a329;
-		color: white;
-		padding: 15px 20px;
-		margin: 10px 0px;
-		border: none;
-		cursor: pointer;
-		width: 100%;
-		font-weight: bold;
-		}
-	
-
-</style>
-</head>
-<body>
-	<form class="container" action="/register" method="post">
-		<h1>Register</h1>
-		<p>Please fill in this form to create an account.</p>
-		<hr>
-		
-		<label for="name"><b>Name</b></label>
-		<input type="text" placeholder="Enter Your Name" name="Name" required><br>
-		
-		<!-- <label for="number"><b>Contact No.</b></label>
-		<input type="text" placeholder="Enter Your Contact No." name="number" required><br>
-		 -->
-		<!-- <label for="email"><b>Email</b></label> 
-		<input type="text" placeholder="Enter Your E-mail" name="email" required><br> -->
-
-		<label for="pwd"><b>Password</b></label>
-		<input type="password" placeholder="Enter Your Password" name="Password" required><br>
-
-		<!-- <label for="psw-repeat"><b>Repeat Password</b></label>
-		<input type="password" placeholder="Repeat Your Password" name="psw-repeat" required><br> -->
-		
-
-		<button type="submit" class="registerbutton">Register</button>
-		
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login Form</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+    <style>body{
+    margin: 0;
+    padding: 0;
+    font-family:'Coiny',cursive;
+    background: #34495e;
+  }
+  .container{
+    width:300px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #191919;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 50px 50px;
+  }
+  .container h1{
+    color: white;
+    font-weight: 500;
   
-		
-		<p>Already have an account? <a href="/login">Sign in</a>.</p>
-		
-	</form>
+  }
+  .container input[type="text"],.container input[type="password"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 24px;
+    transition: 0.25s;
+  }
+  .container input[type="text"]:focus,.container input[type="password"]:focus{
+    width: 280px;
+    border-color: #2ecc71;
+  }
+  .container input[type="submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 25px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    font-size: 17px;
+    font-family: 'Libre Baskerville', serif;
+  }
+  .container input[type="submit"]:hover{
+    background: #2ecc71;
+  }</style>
+  </head>
+  <body>
+    <form class="container" action="/register" method="POST">
+      <h1>Register</h1>
+      <input type="text" name="Name" placeholder="Username" required>
+      <input type="text" name="Email" placeholder="Email" required>
+      <input type="password" name="Password" placeholder="Password" required>
+      <input type="submit" value="Register">
+      <br>
+      <a href="/login">Already had account</a>
 
-
-</body>
+    </form>
+  </body>
 </html>

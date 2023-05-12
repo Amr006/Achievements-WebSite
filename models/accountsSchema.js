@@ -7,6 +7,10 @@ const accountSchema = new schema({
     type: String,
     required: true,
   },
+  Email: {
+    type: String,
+    required : true ,
+  },
   Password: {
     type: String,
     require: true,
@@ -18,7 +22,11 @@ const accountSchema = new schema({
     date: {
         type: Date,
         default:new Date()
-  }
+  },
+  verified: {
+    type: Boolean,
+    default: false 
+    }
 });
 
 const Accounts = mongoose.model("accounts", accountSchema);
