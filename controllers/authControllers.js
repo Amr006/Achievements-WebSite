@@ -177,4 +177,59 @@ const login = (req, res, next) => {
     });
 };
 
-module.exports = { register, login };
+const otherRegister = (req,res,next,userProfile ) => {
+  //res.send(userProfile)
+  
+  const email = userProfile._json.email ;
+  const name = userProfile._json.name ; 
+
+  User.findOne({ Email: email }).then((user) => {
+    if (user) {
+      let token = jwt.sign(
+        { Id: user.id, Name: user.Name, Date: user.date},
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "1h",
+        }
+      );
+
+      res.cookie("token", token, { httpOnly: true });
+
+      res.redirect("/Home");
+    } else {
+      
+        let user = new User({
+          Name: name,
+          Email: email,
+        });
+        user
+          .save()
+          .then((user) => {
+
+            let token = jwt.sign(
+              { Id: user.id, Name: user.Name, Date: user.date},
+              process.env.SECRET_KEY,
+              {
+                expiresIn: "1h",
+              }
+            );
+      
+            res.cookie("token", token, { httpOnly: true });
+      
+            res.redirect("/Home");
+
+          })
+          .catch((error) => {
+            res.json({
+              message: "An error occured ! ",
+            });
+          });
+      
+    }
+  });
+  
+}
+
+
+
+module.exports = { register, login , otherRegister };

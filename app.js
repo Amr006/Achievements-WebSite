@@ -15,6 +15,13 @@ const User = require("./models/accountsSchema");
 app.use(cookieParser());
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const session = require('express-session')
+
+app.use(session({
+  resave: false, 
+  saveUninitialized : true ,
+  secret: 'SECRET'
+}))
 
 mongoose
   .connect(process.env.DB_CONN, {
@@ -138,6 +145,54 @@ app.get("/Contact", (req, res) => {
 );
 
 app.post("/Contact" , homeControllers.sendContact)
-app.use((req, res) => {
-  res.status(404).send("Sorry can't find that!");
+
+const passport = require('passport');
+var userProfile;
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+app.get('/success', (req,res,next) => {
+  authControllers.otherRegister(req, res, next, userProfile);
+}
+);
+app.get('/error', (req, res) => res.send("error logging in"));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
 });
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:8080/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+      userProfile=profile;
+      return done(null, userProfile);
+  }
+));
+ 
+app.get('/auth/google', 
+  passport.authenticate('google', { scope : ['profile', 'email'] }));
+ 
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/error' }),
+  function(req, res) {
+    // Successful authentication, redirect success.
+    
+    res.redirect('/success');
+  });
+
+  app.use((req, res) => {
+    res.status(404).send("Sorry can't find that!");
+  });
+  
